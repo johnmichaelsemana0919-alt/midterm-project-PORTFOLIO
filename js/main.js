@@ -16,8 +16,8 @@ const card = document.querySelector('.about-card');
 
 card.addEventListener('mousemove', (e) => {
   const rect = card.getBoundingClientRect();
-  const x = e.clientX - rect.left;  // mouse X inside card
-  const y = e.clientY - rect.top;   // mouse Y inside card
+  const x = e.clientX - rect.left; 
+  const y = e.clientY - rect.top;   
 
   // update gradient center to follow cursor
   card.style.setProperty('--glow-x', `${x}px`);
@@ -46,7 +46,7 @@ const starContainer = document.createElement("div");
 starContainer.classList.add("about-stars");
 aboutSection.appendChild(starContainer);
 
-// How many stars
+// Count of stars
 const starCount = 100;
 
 for (let i = 0; i < starCount; i++) {
@@ -74,9 +74,9 @@ I believe in continuous learning and staying updated with the latest trends in t
 const typingElement = document.getElementById("typing-text");
 
 let i = 0;
-const typingSpeed = 30;
-const pauseAfterComplete = 2000;
-const eraseSpeed = 15;
+const typingSpeed = 10; 
+const pauseAfterComplete = 5000; 
+const eraseSpeed = 5;
 let isErasing = false;
 
 function typeWriter() {
@@ -97,14 +97,14 @@ function typeWriter() {
   } else if (isErasing && i === 0) {
     // Finished erasing, start typing again
     isErasing = false;
-    setTimeout(typeWriter, 500);
+    setTimeout(typeWriter, 300);
   }
 }
 
 // Start typing once page loads
 window.addEventListener('DOMContentLoaded', typeWriter);
 
-// Premium 3D flip animation with realistic physics
+// 3D flip animation 
 document.addEventListener('DOMContentLoaded', function() {
   const flipCard = document.getElementById('flipCard');
   
@@ -118,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
       isAnimating = true;
       isFlipped = !isFlipped;
       
-      // Create realistic 3D flip with momentum and physics
+      // Create realistic 3D flip
       if (isFlipped) {
-        // Flip to back with realistic motion
+        // Flip to back 
         this.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         this.style.transform = 'rotateY(90deg) scale(0.95) rotateX(5deg)';
         
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
         
       } else {
-        // Flip to front with realistic motion
+        // Flip to front 
         this.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         this.style.transform = 'rotateY(90deg) scale(0.95) rotateX(5deg)';
         
@@ -216,8 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     (entries) => {
                         entries.forEach((entry) => {
                             if (entry.isIntersecting) {
-                                laceHolder.classList.remove("animate"); // reset animation
-                                void laceHolder.offsetWidth; // trick to re-trigger animation
+                                laceHolder.classList.remove("animate"); 
+                                void laceHolder.offsetWidth; 
                                 laceHolder.classList.add("animate");
                             }
                         });
@@ -227,3 +227,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 observer.observe(laceHolder);
             });
+            
+
+
+
+
+            // Scroll ANimation FADE IN
+         
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("#about");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  });
+  sections.forEach(section => observer.observe(section));
+});
+
+
+
+
+// Fade-in (LEFT) animation for about section
+document.addEventListener("DOMContentLoaded", () => {
+  const aboutSection = document.querySelector("#about-me");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        aboutSection.classList.add("visible");
+        // If you only want the animation once:
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 }); // 20% visible triggers
+
+  observer.observe(aboutSection);
+});
+
+
+// Fade-in (RIGHT) animation for flip card
+document.addEventListener("DOMContentLoaded", () => {
+  const flipCard = document.querySelector(".flip-card");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        // If you only want it once:
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 }); // triggers at 20% visible
+
+  observer.observe(flipCard);
+});
+
+
+// Staggered fade-in for project cards
+document.addEventListener("DOMContentLoaded", () => {
+  const projectCards = document.querySelectorAll(".project-card");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  projectCards.forEach((card, index) => {
+    card.style.transitionDelay = `${index * 0.2}s`; // 0.2s stagger
+    observer.observe(card);
+  });
+});
+
+
+// Staggered fade-in for tech stack cards
+document.addEventListener("DOMContentLoaded", () => {
+  const stackCards = document.querySelectorAll(".stack-card");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+       
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+ 
+  stackCards.forEach((card, index) => {
+    card.style.transitionDelay = `${index * 0.1}s`;
+    observer.observe(card);
+  });
+});
+
+// Fade-in for contact section
+document.addEventListener("DOMContentLoaded", () => {
+  const elems = document.querySelectorAll(".contact-info, .contact-form");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  elems.forEach(el => observer.observe(el));
+});
+
